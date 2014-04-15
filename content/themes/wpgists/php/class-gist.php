@@ -31,4 +31,13 @@ class Gist extends \WordPress_Objects\Post {
 		return $this->get_field( 'post_content' );
 	}
 
+	/**
+	 * Get the link to edit the gist
+	 *
+	 * @return string
+	 */
+	public function get_edit_link() {
+		return rtrim( $this->get_permalink(), '/' ) . '/edit/';
+	}
+
 }

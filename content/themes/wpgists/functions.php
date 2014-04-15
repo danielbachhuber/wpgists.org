@@ -36,7 +36,12 @@ class WP_Gists {
 
 		Timber::add_route( 'gist/add', function( $params ) {
 			Timber::load_template( 'add-gist.php', null, 200 );
- 		} );
+		} );
+
+		Timber::add_route( 'gist/:id/edit', function( $params ) {
+			$query = "p={$params['id']}&post_type=gist";
+			Timber::load_template( 'edit-gist.php', $query, 200 );
+		} );
 
 	}
 
@@ -50,6 +55,7 @@ class WP_Gists {
 		add_action( 'wp_enqueue_scripts', array( $this, 'action_wp_enqueue_scripts' ) );
 
 		add_action( 'admin_post_add_gist', array( $this, 'handle_add_gist' ) );
+		add_action( 'admin_post_edit_gist', array( $this, 'handle_edit_gist' ) );
 
 	}
 
@@ -129,6 +135,36 @@ class WP_Gists {
 
 		$gist->set_description( wp_filter_nohtml_kses( $_POST['description'] ) );
 		$gist->set_content( $_POST['content'] ); // No sanitization necessary
+
+		wp_safe_redirect( $gist->get_permalink() );
+		exit;
+	}
+
+	/**
+	 * Handle the action to edit an existing gist
+	 */
+	public function handle_edit_gist() {
+
+		$gist_id = (int) $_POST['gist-id'];
+		$post = get_post( $gist_id );
+		if ( ! $post || 'gist' !== $post->post_type ) {
+			wp_safe_redirect( home_url() );
+			exit;
+		}
+
+		$gist = new \WP_Gists\Gist( $gist_id );
+		if ( ! current_user_can( 'edit_post', $gist->get_id() ) || ! wp_verify_nonce( $_POST['nonce'], 'edit-gist-' . $gist->get_id() ) ) {
+			wp_safe_redirect( $gist->get_permalink() );
+			exit;
+		}
+
+		if ( empty( $_POST['content'] ) || empty( $_POST['description'] ) ) {
+			wp_safe_redirect( $gist->get_edit_link() );
+			exit;
+		}
+
+		$gist->set_description( wp_filter_nohtml_kses( $_POST['description'] ) );
+		$gist->set_content( stripslashes( $_POST['content'] ) ); // No sanitization necessary
 
 		wp_safe_redirect( $gist->get_permalink() );
 		exit;

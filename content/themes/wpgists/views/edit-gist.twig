@@ -1,0 +1,32 @@
+{% extends "base.twig" %}
+{% block content %}
+
+	<article class="small-12 column">
+
+		<h2>Edit Gist</h2>
+
+		<form method="POST" action="{{ form_action }}">
+
+			<fieldset class="row">
+
+				<div id="ace-editor"></div>
+
+				<textarea name="content" required>{{ gist.get_content() }}</textarea>
+
+			</fieldset>
+
+			<fieldset class="row">
+				<textarea name="description" rows="3" required placeholder="Describe this Gist in a sentence or two.">{{ gist.get_description() }}</textarea>
+			</fieldset>
+
+			<fieldset class="row">
+				<input type="hidden" value="{{ gist.get_id() }}" name="gist-id" />
+				<input type="hidden" value="{{ nonce }}" name="nonce" />
+				<input type="submit" value="Update Gist" class="button" />
+			</fieldset>
+
+		</form>
+
+	</article>
+
+{% endblock %}
