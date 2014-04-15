@@ -1,2 +1,5 @@
 # Local version of the config file
 /wp-config-env.php
+
+# Silly Mac
+.DS_Store
