@@ -1,3 +1,6 @@
 [submodule "wp"]
 	path = wp
 	url = git@github.com:WordPress/WordPress.git
+[submodule "content/mu-plugins/timber"]
+	path = content/mu-plugins/timber
+	url = git@github.com:jarednova/timber.git
