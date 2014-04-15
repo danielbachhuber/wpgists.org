@@ -1,7 +1,13 @@
 {% extends "base.twig" %}
 {% block content %}
 
-	<article>
+	<article class="small-8 small-offset-2 column">
+
+		{% for gist in gists %}
+
+			{{ gist.get_description() }}
+
+		{% endfor %}
 
 	</article>
 

@@ -26,6 +26,7 @@ class WP_Gists {
 	private function require_files() {
 
 		require_once dirname( __FILE__ ) . '/php/class-gist.php';
+		require_once dirname( __FILE__ ) . '/php/class-user.php';
 
 	}
 
@@ -66,6 +67,14 @@ class WP_Gists {
 			if ( ! current_user_can( 'manage_options' ) && 'admin-post.php' != $pagenow ) {
 				wp_safe_redirect( home_url() );
 				exit;
+			}
+
+		});
+
+		add_action( 'pre_get_posts', function( $query ) {
+
+			if ( $query->is_home() && $query->is_main_query() ) {
+				$query->set( 'post_type', 'gist' );
 			}
 
 		});
@@ -194,6 +203,9 @@ class WP_Gists {
 	public function filter_timber_context( $context ) {
 
 		$context['is_user_logged_in'] = is_user_logged_in();
+		if ( is_user_logged_in() ) {
+			$context['user'] = new \WP_Gists\User( get_current_user_id() );
+		}
 
 		$context['meta_title'] = get_bloginfo( 'name' );
 		$context['meta_description'] = get_bloginfo( 'description' );

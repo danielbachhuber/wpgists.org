@@ -3,11 +3,41 @@
 
 	<article class="small-12 column">
 
-		<div id="ace-editor"></div>
+		<div class="row">
+			<div class="small-8 column">
+				<span class="user-avatar left">{{ gist.get_author().get_avatar( 32 ) }}</span>
+				<h4>{{ gist.get_author().get_user_login() }}</h4>
+			</div>
 
-		<textarea name="content" disabled>{{ gist.get_content() }}</textarea>
+			<div class="small-4 column">
+			{% if gist.current_user_can_edit() %}
+				<a href="{{ gist.get_edit_link() }}" class="button tiny secondary right">Edit</a>
+			{% endif %}
+			</div>
 
-		<p class="description">{{ gist.get_description() }}</p>
+		</div>
+
+		<div class="row">
+
+			<div class="small-12 column">
+
+				<div class="gist-description">{{ gist.get_description() }}</div>
+
+			</div>
+
+		</div>
+
+		<div class="row">
+
+			<div class="small-12 column">
+
+				<div id="ace-editor"></div>
+
+				<textarea name="content" disabled>{{ gist.get_content() }}</textarea>
+
+			</div>
+
+		</div>
 
 	</article>
 

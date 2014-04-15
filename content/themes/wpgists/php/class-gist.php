@@ -40,4 +40,13 @@ class Gist extends \WordPress_Objects\Post {
 		return rtrim( $this->get_permalink(), '/' ) . '/edit/';
 	}
 
+	/**
+	 * Can the current user edit the gist?
+	 *
+	 * @return bool
+	 */
+	public function current_user_can_edit() {
+		return current_user_can( 'edit_post', $this->get_id() );
+	}
+
 }
