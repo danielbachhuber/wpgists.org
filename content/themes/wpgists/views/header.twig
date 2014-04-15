@@ -18,22 +18,26 @@
 
 <body class="{{body_class}}" data-source="base.twig">
 
-	<header id="site-header" class="row">
+	<header id="site-header">
+
+		<div class="row">
 
 		{% block header %}
 
-		<div class="small-3 column">
+		<div class="small-12 medium-3 large-2 column">
 
 			<h1><a href="/" rel="home">{{bloginfo('name')}}</a></h1>
 
 		</div>
 
-		<div class="small-9 column">
+		<div class="small-12 medium-9 large-10 column">
 
-			<h2 class="description">{{bloginfo('description')}}</h2>
+			<h2 id="site-description">{{bloginfo('description')}}</h2>
 
 		</div>
 
 		{% endblock %}
+
+		</div>
 
 	</header>
