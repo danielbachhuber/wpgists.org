@@ -1,0 +1,7 @@
+path: wp
+core install:
+  title: WP Gists
+  url: http://wpgists.dev
+  admin_user: wpgists
+  admin_password: wpgists
+  admin_email: info@wpgists.org
