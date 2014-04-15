@@ -4,3 +4,6 @@
 [submodule "content/mu-plugins/timber"]
 	path = content/mu-plugins/timber
 	url = git@github.com:jarednova/timber.git
+[submodule "content/mu-plugins/wordpress-objects"]
+	path = content/mu-plugins/wordpress-objects
+	url = git@github.com:danielbachhuber/WordPress-Objects.git
