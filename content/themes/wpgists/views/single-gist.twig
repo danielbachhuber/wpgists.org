@@ -1,0 +1,14 @@
+{% extends "base.twig" %}
+{% block content %}
+
+	<article class="small-12 column">
+
+		<p class="description">{{ gist.get_description() }}</p>
+
+		<div id="ace-editor"></div>
+
+		<textarea name="content" disabled>{{ gist.get_content() }}</textarea>
+
+	</article>
+
+{% endblock %}

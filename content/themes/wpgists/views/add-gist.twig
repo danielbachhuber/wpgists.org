@@ -1,0 +1,30 @@
+{% extends "base.twig" %}
+{% block content %}
+
+	<article class="small-12 column">
+
+		<h2>Add Gist</h2>
+
+		<form method="POST" action="{{ form_action }}">
+
+			<fieldset class="row">
+
+				<div id="ace-editor"></div>
+
+				<textarea name="content" required></textarea>
+
+			</fieldset>
+
+			<fieldset class="row">
+				<textarea name="description" rows="3" required placeholder="Describe this Gist in a sentence or two."></textarea>
+			</fieldset>
+
+			<fieldset class="row">
+				<input type="submit" value="Add Gist" class="button" />
+			</fieldset>
+
+		</form>
+
+	</article>
+
+{% endblock %}
