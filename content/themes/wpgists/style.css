@@ -1,0 +1,11 @@
+/*
+Theme Name:     WP Gists
+Theme URI:      http://wpgists.org
+Description:    Wpgists child theme.
+Author:         Daniel Bachhuber
+Author URI:     http://danielbachhuber.com
+Template:       wpgists
+Version:        0.1.0
+*/
+
+@import '../wpgists/style.css';
