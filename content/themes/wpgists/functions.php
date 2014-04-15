@@ -52,6 +52,24 @@ class WP_Gists {
 
 		add_action( 'init', array( $this, 'action_init_register_post_types' ) );
 
+		add_action( 'init', function(){
+
+			if ( ! is_admin() ) {
+				show_admin_bar( false );
+			}
+
+		});
+
+		add_action( 'admin_init', function() {
+			global $pagenow;
+
+			if ( ! current_user_can( 'manage_options' ) && 'admin-post.php' != $pagenow ) {
+				wp_safe_redirect( home_url() );
+				exit;
+			}
+
+		});
+
 		add_action( 'wp_enqueue_scripts', array( $this, 'action_wp_enqueue_scripts' ) );
 
 		add_action( 'admin_post_add_gist', array( $this, 'handle_add_gist' ) );
