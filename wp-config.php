@@ -51,6 +51,12 @@ foreach( $wp_constant_defaults as $key => $value ) {
 	}
 }
 
+if ( isset( $_SERVER['WP_CLI_PHP_USED'] )
+	&& ! isset( $_SERVER['HTTP_HOST'] )
+	&& defined( 'WP_HOME' ) ) {
+	$_SERVER['HTTP_HOST'] = parse_url( WP_HOME, PHP_URL_HOST );
+}
+
 /**
  * WordPress Database Table prefix.
  *
